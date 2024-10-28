@@ -22,10 +22,11 @@ mongoose.connect(process.env.MONGO_DB).then(()=>{
 })
 //var indexRouter = require('./routes/index');
 import indexRouter from './routes/index.js';
+import apiRouter from './routes/api/index.js';
 // var usersRouter = require('./routes/users');
-import usersRouter from './routes/users.js';
+import usersRouter from './routes/api/users.js';
 //books router
-import booksRouter from './routes/books.js';
+import booksRouter from './routes/api/books.js';
 import { log } from 'console';
 
 var app = express();
@@ -43,9 +44,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/books',booksRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+// app.use('/books',booksRouter);
+app.use('/',indexRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
