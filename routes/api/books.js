@@ -1,4 +1,4 @@
-import book from '../models/book.js'
+import book from '../../models/book.js'
 import express from 'express';
 const router = express.Router();
 
