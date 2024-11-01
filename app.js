@@ -11,6 +11,9 @@ import logger from 'morgan';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 
+//temporary import
+// import checkMarcoPolo from './middleware/checkMarcoPolo.js';
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -43,6 +46,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//temporary 
+// app.use(checkMarcoPolo);
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);

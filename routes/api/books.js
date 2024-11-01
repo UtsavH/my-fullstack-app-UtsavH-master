@@ -1,4 +1,5 @@
 import book from '../../models/book.js'
+import checkToken from '../../middleware/checkToken.js';
 import express from 'express';
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.get('/:id', (req, res)=>{
 })
 
 //create book
-router.post('/', (req, res) => {
+router.post('/', checkToken,(req, res) => {
     const newBook = new book(req.body);
 
     newBook.save()
@@ -42,7 +43,7 @@ router.post('/', (req, res) => {
 });
 
 //update book
-router.put('/:id', (req, res) => {
+router.put('/:id', checkToken,(req, res) => {
     // Find the book by ID and update it with the data from req.body
     book.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).exec()
         .then(data => {
@@ -61,8 +62,9 @@ router.put('/:id', (req, res) => {
 
 
 //delete book by id 
-router.delete('/:id',(req,res)=>{
+router.delete('/:id',checkToken,(req,res)=>{
     // res.send(`delete book by id ${req.params.id}`)
+    
     book.findByIdAndDelete(req.params.id).exec()
     .then(data =>{ if (!data) { return res.status(404).send({ message: "Book not found with id " + req.params.id });} 
     res.send({ message: "Book deleted successfully", data });
