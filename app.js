@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 //temporary import
 // import checkMarcoPolo from './middleware/checkMarcoPolo.js';
@@ -41,6 +42,8 @@ const __dirname= path.dirname(__filename); //get the name of the directory
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

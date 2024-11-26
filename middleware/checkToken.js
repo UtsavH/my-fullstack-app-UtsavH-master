@@ -12,10 +12,10 @@ const checkToken = (req, res, next) => {
     }
 
     try {
-        // Verify that the token is valid
-        const decoded = jwt.verify(token, 'assigment2Phase2'); // Replace 'your_jwt_secret_key' with your actual secret key
+        // Verifying that the token is valid
+        const decoded = jwt.verify(token, 'assigment2Phase2');
         req.user = decoded.user;
-        next(); // Allow the request to proceed
+        next(); // Allowing the request to proceed
         
     } catch (err) {
         res.status(401).json({ msg: 'Token is not valid' });

@@ -30,6 +30,16 @@ router.post('/register', async (req, res) => {
         // Saveing the new user
         const savedUser = await newUser.save();
 
+        const token = jwt.sign(
+            { userId: savedUser._id, email: savedUser.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+         // Respond with the JWT in the custom header and a success message
+         res.setHeader('Access-Control-Expose-Headers','x-auth-token')
+         res.setHeader('x-auth-token', token);
+
         // Responding with the newly created user's email and _id
         res.status(201).json({
             email: savedUser.email,
@@ -90,6 +100,7 @@ router.post('/login', async (req, res) => {
         );
 
         // Respond with the JWT in the custom header and a success message
+        res.setHeader('Access-Control-Expose-Headers','x-auth-token')
         res.setHeader('x-auth-token', token);
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
