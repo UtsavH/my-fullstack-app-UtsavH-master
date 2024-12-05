@@ -1,30 +1,36 @@
 import React from 'react';
 import '../css/signin.css';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import authService from '../services/authService';
 
 const SignIn = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate(); // Initialize the navigate function
 
-    function receiveFormData(formData) {
-        axios.post(`http://localhost:3000/api/users/login`, formData)
-            .then(response => {
-                if (response.status === 200) {
-                    const token = response.headers['x-auth-token'];
-                    if (token) {
-                        localStorage.setItem('token', token); // Saveing the token in local storage
-                        console.log('Login successful! Token:', token);
-                        navigate('/'); // Redirect to the home page after sucess login 
-                    }
-                } else {
-                    console.log('Unexpected response:', response);
-                }
-            })
-            .catch(error => {
-                console.error('Login error:', error);
-            });
+    async function receiveFormData(formData) {
+        console.log(formData)
+        authService.signIn(formData,success=>{
+            if(success){
+                sessionStorage.setItem('isLoggedIn','true')
+                navigate('/')
+            } else{
+                console.log('unsuccessful login')
+            }
+        })
+        
+        // axios.post(`http://localhost:3000/api/users/login`, formData,{ withCredentials: true })
+        //     .then(response => {
+        //         if (response.status === 200) {
+        //             navigate('/');
+        //         }
+        //         else{
+        //             console.log('invalid longin')
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Login error:', error);
+        //     });
     }
 
     return (

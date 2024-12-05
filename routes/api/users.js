@@ -100,8 +100,14 @@ router.post('/login', async (req, res) => {
         );
 
         // Respond with the JWT in the custom header and a success message
-        res.setHeader('Access-Control-Expose-Headers','x-auth-token')
-        res.setHeader('x-auth-token', token);
+        // res.setHeader('Access-Control-Expose-Headers','x-auth-token')
+        // res.setHeader('x-auth-token', token);
+
+        //send the token in http cookie only for secure storage
+        res.cookie('jwt', token, { httpOnly: true, path:'/'})
+        res.cookie('isLoggedIn', true,{path: '/'})
+
+
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
         console.error(error);
@@ -112,6 +118,10 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.post('/logout', (req, res)=>{
+    res.clearCookie('jwt')
+    res.status(204).send()
+})
 
 
 // module.exports = router;
