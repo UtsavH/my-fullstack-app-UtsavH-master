@@ -18,19 +18,7 @@ const SignIn = (props) => {
                 console.log('unsuccessful login')
             }
         })
-        
-        // axios.post(`http://localhost:3000/api/users/login`, formData,{ withCredentials: true })
-        //     .then(response => {
-        //         if (response.status === 200) {
-        //             navigate('/');
-        //         }
-        //         else{
-        //             console.log('invalid longin')
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.error('Login error:', error);
-        //     });
+
     }
 
     return (

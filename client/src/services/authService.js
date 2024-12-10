@@ -3,7 +3,7 @@ import axios from 'axios'
 class authService{
     async register(registerData, callback) {
         try {
-            const response = await axios.post('http://localhost:3000/api/users/register', registerData);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/register', registerData`);
 
             if (response.status === 200) {
                 // Registration successful, return success to the callback
@@ -22,7 +22,7 @@ class authService{
         // make a call to our login api endpoint
 
         try{
-            const response= await axios.post(`http://localhost:3000/api/users/login`, loginData,{withCredentials: true})
+            const response= await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, loginData,{withCredentials: true})
             // if(response.status === 200){
             //     navigate('/')
             // } else{
@@ -51,7 +51,7 @@ class authService{
     async signOut(callback){
         // delete token from cookiess
         try{
-            const response = await axios.post(`http://localhost:3000/api/users/logout`)
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/logout`)
             if(response.status=== 204){
                 sessionStorage.removeItem('isLoggedIn')
                 callback(true)

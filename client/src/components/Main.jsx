@@ -8,7 +8,7 @@ const Main = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/books').then((response) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/books`, {withCredentials:true}).then((response) => {
       setData(response.data);
     });
   }, []);

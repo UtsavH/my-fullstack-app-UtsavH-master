@@ -8,10 +8,8 @@ const CreateForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Send data to the backend API to save the new book
-      // const response = await axios.post('http://localhost:3000/api/books', data);
       //withCredentials is set true so that cookies are send along with that. 
-      const response = await axios.post('http://localhost:3000/api/books', data, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/books`, data, {
         withCredentials: true
       });
       
