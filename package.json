@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "concurrently \"npm start \" \"cd client && npm run dev\" --killOthers"
+    "start": "node ./bin/www.js",
+    "local":"nodemon ./bin/www.js",
+    "dev": "concurrently \"npm run local \" \"cd client && npm run dev\" --killOthers"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
