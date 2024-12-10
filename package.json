@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node ./bin/www.js",
-    "local":"nodemon ./bin/www.js",
+    "start": "node ./bin/www",
+    "local":"nodemon ./bin/www",
     "dev": "concurrently \"npm run local \" \"cd client && npm run dev\" --killOthers"
   },
   "dependencies": {
