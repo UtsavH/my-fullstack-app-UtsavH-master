@@ -10,7 +10,7 @@ const checkToken = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ msg: 'No token, authorization denied' });
     }
-
+ 
     try {
         // Verifying that the token is valid
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

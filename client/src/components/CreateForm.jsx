@@ -1,21 +1,22 @@
 import { useForm } from 'react-hook-form';
+import '../css/createform.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // useNavigate instead of useHistory
 
 const CreateForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  // const navigate = useNavigate(); // useNavigate hook for programmatic navigation
+  const navigate = useNavigate(); // useNavigate hook for programmatic navigation
 
   const onSubmit = async (data) => {
     try {
-      //withCredentials is set true so that cookies are send along with that. 
+      // withCredentials is set true so that cookies are sent along with the request
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/books`, data, {
         withCredentials: true
       });
       
       console.log(response.data);
-      // // Redirect to another page (for example, the list of books)
-      history.push('/');
+      // Redirect to the home page or list of books
+      navigate('/');
     } catch (error) {
       console.error('Error creating book:', error);
     }
@@ -25,6 +26,7 @@ const CreateForm = () => {
     <div>
       <h2>Create New Book</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Title Field */}
         <div>
           <label htmlFor="title">Title:</label>
           <input
@@ -74,6 +76,10 @@ const CreateForm = () => {
             {...register('genre', { required: 'Genre is required' })}
           >
             <option value="Science Fiction">Science Fiction</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Biography">Biography</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            {/* Add more genres if necessary */}
           </select>
           {errors.genre && <p>{errors.genre.message}</p>}
         </div>

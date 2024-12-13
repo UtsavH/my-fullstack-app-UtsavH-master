@@ -23,6 +23,7 @@ const Register = () => {
         <form className="form-register" onSubmit={handleSubmit(receiveFormData)}>
             <h1 className="h3 mb-3 font-weight-normal text-center">Register</h1>
 
+            {/* First Name Input */}
             <label htmlFor="inputFirstName" className="sr-only">First Name</label>
             <input
                 {...register('firstName', { required: 'First name is required' })}
@@ -33,6 +34,7 @@ const Register = () => {
             />
             {errors.firstName && <span className="text-danger">{errors.firstName.message}</span>}
 
+            {/* Last Name Input */}
             <label htmlFor="inputLastName" className="sr-only">Last Name</label>
             <input
                 {...register('lastName', { required: 'Last name is required' })}
@@ -43,6 +45,7 @@ const Register = () => {
             />
             {errors.lastName && <span className="text-danger">{errors.lastName.message}</span>}
 
+            {/* Email Input */}
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
             <input
                 {...register('email', { 
@@ -59,9 +62,16 @@ const Register = () => {
             />
             {errors.email && <span className="text-danger">{errors.email.message}</span>}
 
+            {/* Password Input */}
             <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input
-                {...register('password', { required: 'Password is required' })}
+                {...register('password', { 
+                    required: 'Password is required',
+                    minLength: {
+                        value: 6,
+                        message: 'Password must be at least 6 characters long'
+                    }
+                })}
                 type="password"
                 id="inputPassword"
                 className="form-control"

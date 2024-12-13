@@ -18,3 +18,7 @@
     font-size: 0.9em;
     margin-bottom: 10px;
 }
+.text-danger {
+    color: red;
+    font-size: 12px;
+  }

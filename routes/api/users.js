@@ -9,8 +9,6 @@ dotenv.config(); // Loading environment variables from .env file
 
 const router = express.Router();
 
-
-
 router.post('/register', async (req, res) => {
     try {
         // Validateing user input fields according to the schema
